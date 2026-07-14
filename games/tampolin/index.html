@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tampolin - Game Tampol Online</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="game">
+
+        <!-- START SCREEN -->
+        <section class="screen start-screen active" id="startScreen">
+
+            <div class="start-card">
+
+                <div class="game-logo">👋</div>
+
+                <span class="game-label">GAME RECEH</span>
+
+                <h1 class="game-title">TAMPOLIN!</h1>
+
+                <p class="game-description">
+                    Masukkan nama dan pilih gambar target,
+                    lalu pilih jurus andalanmu dan tampol sebanyak-banyaknya!
+                </p>
+
+                <div class="input-group">
+
+                    <label for="targetName">
+                        Siapa yang mau ditampol?
+                    </label>
+
+                    <input
+                        type="text"
+                        id="targetName"
+                        placeholder="Masukkan nama..."
+                        maxlength="20"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+                <!-- UPLOAD -->
+                <div class="upload-group">
+
+                    <label class="upload-label">
+                        Pilih gambar target
+                    </label>
+
+                    <label
+                        for="targetImage"
+                        class="upload-box"
+                    >
+
+                        <div
+                            class="upload-placeholder"
+                            id="uploadPlaceholder"
+                        >
+
+                            <div class="upload-icon">📷</div>
+
+                            <strong>Pilih Gambar</strong>
+
+                            <span>JPG, PNG atau WEBP</span>
+
+                        </div>
+
+                        <div
+                            class="upload-preview"
+                            id="uploadPreview"
+                        >
+
+                            <img
+                                src=""
+                                id="previewImage"
+                                alt="Preview gambar"
+                            >
+
+                            <div class="upload-change">
+                                📷 Ganti Gambar
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                    <input
+                        type="file"
+                        id="targetImage"
+                        accept="image/png,image/jpeg,image/webp"
+                        hidden
+                    >
+
+                </div>
+
+                <button
+                    class="start-button"
+                    id="startButton"
+                >
+                    👋 MULAI TAMPOL!
+                </button>
+
+                <p class="start-note">
+                    Santai, ini cuma game 😆
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- GAME SCREEN -->
+        <section class="screen game-screen" id="gameScreen">
+
+            <!-- HEADER -->
+            <header class="game-header">
+
+                <div class="game-stat">
+                    <span class="stat-label">SKOR</span>
+                    <strong id="score">0</strong>
+                </div>
+
+                <div class="target-information">
+                    <span>TARGET</span>
+                    <strong id="displayTargetName">Tono</strong>
+                </div>
+
+                <div class="game-stat">
+                    <span class="stat-label">WAKTU</span>
+                    <strong id="timer">30</strong>
+                </div>
+
+            </header>
+
+
+            <!-- GAME AREA -->
+            <div class="game-area" id="gameArea">
+
+                <!-- BACKGROUND -->
+                <div class="sun"></div>
+
+                <div class="cloud cloud-one">☁️</div>
+
+                <div class="cloud cloud-two">☁️</div>
+
+
+                <!-- COMBO -->
+                <div class="combo" id="combo">
+                    COMBO x5!
+                </div>
+
+
+                <!-- REACTION -->
+                <div class="reaction-text" id="reactionText">
+                    PLAK!
+                </div>
+
+
+                <!-- HIT EFFECT -->
+                <div class="hit-effect" id="hitEffect">
+                    💥
+                </div>
+
+
+                <!-- INSTRUCTION -->
+                <div class="game-instruction">
+                    👆 Pilih jurus lalu klik target secepat mungkin!
+                </div>
+
+
+                <!-- CHARACTER -->
+                <button
+                    class="character"
+                    id="character"
+                    aria-label="Serang karakter"
+                >
+
+                    <img
+                        src="assets/tono.png"
+                        id="characterImage"
+                        alt="Karakter"
+                        draggable="false"
+                    >
+
+                </button>
+
+
+                <!-- CHARACTER NAME -->
+                <div class="character-name">
+                    <span id="characterName">Tono</span>
+                </div>
+
+
+                <!-- ATTACK SELECTOR -->
+                <div class="attack-selector">
+
+                    <button
+                        class="attack-button active"
+                        data-attack="punch"
+                        type="button"
+                    >
+
+                        <span class="attack-icon">👊</span>
+
+                        <span class="attack-info">
+                            <strong>PUNCH</strong>
+                            <small>+1 Skor</small>
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="attack-button"
+                        data-attack="aslap"
+                        type="button"
+                    >
+
+                        <span class="attack-icon">✋</span>
+
+                        <span class="attack-info">
+                            <strong>A-SLAP</strong>
+                            <small>+2 Skor</small>
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="attack-button"
+                        data-attack="battle"
+                        type="button"
+                    >
+
+                        <span class="attack-icon">🔥</span>
+
+                        <span class="attack-info">
+                            <strong>SLAP BATTLE</strong>
+                            <small>+3 Skor</small>
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RESULT SCREEN -->
+        <section class="screen result-screen" id="resultScreen">
+
+            <div class="result-card">
+
+                <div class="result-emoji">🤣</div>
+
+                <span class="result-label">
+                    WAKTU HABIS!
+                </span>
+
+                <h2 class="result-title">
+                    Puas Nampolnya?
+                </h2>
+
+                <p class="result-description">
+
+                    Kamu berhasil mendapatkan skor saat menampol
+
+                    <strong id="resultTarget">Tono</strong>
+
+                    sebanyak
+
+                </p>
+
+                <div
+                    class="final-score"
+                    id="finalScore"
+                >
+                    0
+                </div>
+
+                <span class="final-score-label">
+                    TOTAL SKOR
+                </span>
+
+                <div
+                    class="result-message"
+                    id="resultMessage"
+                >
+                    Lumayan juga tanganmu!
+                </div>
+
+                <button
+                    class="restart-button"
+                    id="restartButton"
+                >
+                    🔄 TAMPOL LAGI
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- AUDIO -->
+    <audio
+        id="punchSound"
+        src="assets/punch.mp3"
+        preload="auto"
+    ></audio>
+
+    <audio
+        id="aslapSound"
+        src="assets/aslap.mp3"
+        preload="auto"
+    ></audio>
+
+    <audio
+        id="battleSound"
+        src="assets/sound.mp3"
+        preload="auto"
+    ></audio>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

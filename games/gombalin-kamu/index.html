@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Gombalin Kamu 💕</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+
+<div class="game-container">
+
+
+    <!-- BACKGROUND -->
+
+    <div
+        class="heart-background"
+        id="heartBackground"
+    ></div>
+
+
+
+    <!-- ========================================
+         MUSIC CONTROL
+    ========================================= -->
+
+    <button
+        type="button"
+        class="music-button"
+        id="musicButton"
+        title="Musik"
+    >
+
+        🔊
+
+    </button>
+
+
+
+    <!-- ========================================
+         START SCREEN
+    ========================================= -->
+
+    <section
+        class="game-screen start-screen active"
+        id="startScreen"
+    >
+
+        <div class="start-content">
+
+
+            <div class="start-decoration">
+
+                <span>💕</span>
+
+                <span>✨</span>
+
+                <span>💖</span>
+
+            </div>
+
+
+            <div class="game-logo">
+
+                <span class="logo-icon">
+
+                    💌
+
+                </span>
+
+            </div>
+
+
+            <span class="game-label">
+
+                SPECIAL GAME
+
+            </span>
+
+
+            <h1 class="game-title">
+
+                Gombalin
+
+                <span>
+
+                    Kamu
+
+                </span>
+
+            </h1>
+
+
+            <p class="game-description">
+
+                Berani menjawab pertanyaan dari seseorang
+                yang mungkin sedang memikirkanmu?
+
+            </p>
+
+
+
+            <!-- NAME -->
+
+            <div class="name-wrapper">
+
+                <label for="playerName">
+
+                    Siapa nama kamu?
+
+                </label>
+
+
+                <div class="name-input-wrapper">
+
+                    <span>
+
+                        💕
+
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="playerName"
+                        placeholder="Masukkan nama..."
+                        maxlength="20"
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- START -->
+
+            <button
+                type="button"
+                class="primary-button"
+                id="startButton"
+            >
+
+                <span>
+
+                    Mulai Digombalin
+
+                </span>
+
+
+                <span>
+
+                    💕
+
+                </span>
+
+            </button>
+
+
+            <p class="start-note">
+
+                ⚠️ Hati-hati, senyum sendiri ditanggung pemain.
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+         QUESTION SCREEN
+    ========================================= -->
+
+    <section
+        class="game-screen question-screen"
+        id="questionScreen"
+    >
+
+        <div class="game-content">
+
+
+            <div class="game-topbar">
+
+
+                <div>
+
+                    <span class="round-label">
+
+                        PERTANYAAN
+
+                    </span>
+
+
+                    <strong id="roundText">
+
+                        1 / 5
+
+                    </strong>
+
+                </div>
+
+
+                <div class="player-info">
+
+                    💕
+
+                    <span id="playerNameDisplay">
+
+                        Kamu
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PROGRESS -->
+
+            <div class="progress-wrapper">
+
+                <div
+                    class="progress-bar"
+                    id="progressBar"
+                ></div>
+
+            </div>
+
+
+
+            <!-- QUESTION -->
+
+            <div
+                class="question-card"
+                id="questionCard"
+            >
+
+
+                <div class="question-icon">
+
+                    💭
+
+                </div>
+
+
+                <span class="question-small-label">
+
+                    Aku mau tanya sesuatu...
+
+                </span>
+
+
+                <h2
+                    class="question-text"
+                    id="questionText"
+                ></h2>
+
+
+                <span
+                    class="typing-cursor"
+                    id="typingCursor"
+                >
+
+                    |
+
+                </span>
+
+
+            </div>
+
+
+
+            <!-- ANSWERS -->
+
+            <div class="answer-buttons">
+
+
+                <button
+                    type="button"
+                    class="answer-button yes-button"
+                    id="yesButton"
+                >
+
+                    <span class="answer-icon">
+
+                        💕
+
+                    </span>
+
+
+                    <span>
+
+                        IYA
+
+                    </span>
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="answer-button no-button"
+                    id="noButton"
+                >
+
+                    <span class="answer-icon">
+
+                        🙄
+
+                    </span>
+
+
+                    <span>
+
+                        TIDAK
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+         RESPONSE SCREEN
+    ========================================= -->
+
+    <section
+        class="game-screen response-screen"
+        id="responseScreen"
+    >
+
+        <div class="response-content">
+
+
+            <div
+                class="response-emoji"
+                id="responseEmoji"
+            >
+
+                😌
+
+            </div>
+
+
+            <span class="response-label">
+
+                💌 PESAN UNTUKMU
+
+            </span>
+
+
+            <div class="response-card">
+
+                <p
+                    class="response-text"
+                    id="responseText"
+                ></p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="primary-button next-button"
+                id="nextButton"
+            >
+
+                <span id="nextButtonText">
+
+                    Gombalin Lagi
+
+                </span>
+
+
+                <span>
+
+                    💕
+
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+         END SCREEN
+    ========================================= -->
+
+    <section
+        class="game-screen end-screen"
+        id="endScreen"
+    >
+
+        <div class="end-content">
+
+
+            <div class="end-hearts">
+
+                💕 💖 💕
+
+            </div>
+
+
+            <span class="end-label">
+
+                HASIL AKHIR
+
+            </span>
+
+
+            <h2>
+
+                Selamat,
+
+                <span id="endPlayerName">
+
+                    Kamu
+
+                </span>
+
+                !
+
+            </h2>
+
+
+            <div class="end-result-card">
+
+
+                <div
+                    class="end-emoji"
+                    id="endEmoji"
+                >
+
+                    😍
+
+                </div>
+
+
+                <h3 id="endTitle">
+
+                    Berhasil Digombalin!
+
+                </h3>
+
+
+                <p id="endMessage">
+
+                    Sepertinya pertahanan hatimu mulai goyah.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- SCORE -->
+
+            <div class="answer-result">
+
+
+                <div class="answer-result-item">
+
+                    <span class="result-icon">
+
+                        💕
+
+                    </span>
+
+
+                    <strong id="yesScore">
+
+                        0
+
+                    </strong>
+
+
+                    <small>
+
+                        Jawaban Iya
+
+                    </small>
+
+                </div>
+
+
+                <div class="answer-result-divider"></div>
+
+
+                <div class="answer-result-item">
+
+                    <span class="result-icon">
+
+                        🙄
+
+                    </span>
+
+
+                    <strong id="noScore">
+
+                        0
+
+                    </strong>
+
+
+                    <small>
+
+                        Jawaban Tidak
+
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="button"
+                class="primary-button"
+                id="restartButton"
+            >
+
+                <span>
+
+                    Main Lagi
+
+                </span>
+
+
+                <span>
+
+                    🔄
+
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================
+         TOAST
+    ========================================= -->
+
+    <div
+        class="game-toast"
+        id="gameToast"
+    >
+
+        <span id="toastEmoji">
+
+            😂
+
+        </span>
+
+
+        <span id="toastText">
+
+            Tombolnya kabur!
+
+        </span>
+
+    </div>
+
+
+
+    <!-- ========================================
+         ROMANTIC MUSIC
+    ========================================= -->
+
+    <audio
+        id="romanticMusic"
+        loop
+        preload="auto"
+    >
+
+        <source
+            src="sounds/romantic.mp3"
+            type="audio/mpeg"
+        >
+
+    </audio>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

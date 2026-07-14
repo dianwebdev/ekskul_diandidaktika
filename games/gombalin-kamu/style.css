@@ -1,0 +1,1215 @@
+/* ========================================
+   ROOT
+======================================== */
+
+:root {
+
+    --primary: #ec4899;
+    --primary-dark: #db2777;
+
+    --secondary: #a855f7;
+
+    --text-dark: #3f2747;
+
+    --text-muted: #8b6f91;
+
+    --white: #ffffff;
+
+}
+
+
+/* ========================================
+   RESET
+======================================== */
+
+* {
+
+    box-sizing: border-box;
+
+}
+
+
+html,
+body {
+
+    margin: 0;
+
+    width: 100%;
+
+    min-height: 100%;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(236, 72, 153, .16),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(168, 85, 247, .18),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fff1f8,
+            #faf5ff,
+            #fdf2f8
+        );
+
+    color: var(--text-dark);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}
+
+
+/* ========================================
+   GAME
+======================================== */
+
+.game-container {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+}
+
+
+/* ========================================
+   SCREEN
+======================================== */
+
+.game-screen {
+
+    position: relative;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    z-index: 5;
+
+}
+
+
+.game-screen.active {
+
+    display: flex;
+
+    animation: screenShow .5s ease;
+
+}
+
+
+@keyframes screenShow {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* ========================================
+   MUSIC BUTTON
+======================================== */
+
+.music-button {
+
+    position: fixed;
+
+    top: 20px;
+
+    right: 20px;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid rgba(236, 72, 153, .15);
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .85);
+
+    color: var(--text-dark);
+
+    cursor: pointer;
+
+    font-size: 19px;
+
+    box-shadow:
+        0 15px 35px
+        rgba(76, 35, 85, .1);
+
+    backdrop-filter: blur(15px);
+
+    z-index: 100;
+
+    transition: .25s;
+
+}
+
+
+.music-button:hover {
+
+    transform: scale(1.1);
+
+}
+
+
+/* ========================================
+   HEART BACKGROUND
+======================================== */
+
+.heart-background {
+
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+}
+
+
+.floating-heart {
+
+    position: absolute;
+
+    bottom: -100px;
+
+    opacity: .25;
+
+    animation: floatingHeart linear forwards;
+
+}
+
+
+@keyframes floatingHeart {
+
+    from {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+
+    }
+
+    15% {
+
+        opacity: .3;
+
+    }
+
+    to {
+
+        transform:
+            translateY(-120vh)
+            rotate(360deg);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* ========================================
+   START
+======================================== */
+
+.start-content {
+
+    width: 100%;
+
+    max-width: 600px;
+
+    text-align: center;
+
+}
+
+
+.start-decoration {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    margin-bottom: 15px;
+
+    font-size: 20px;
+
+}
+
+
+.start-decoration span {
+
+    animation:
+        decorationFloat
+        2s
+        infinite
+        alternate;
+
+}
+
+
+@keyframes decorationFloat {
+
+    to {
+
+        transform:
+            translateY(-10px)
+            scale(1.2);
+
+    }
+
+}
+
+
+.game-logo {
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.logo-icon {
+
+    width: 95px;
+    height: 95px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    border: 7px solid rgba(255, 255, 255, .7);
+
+    border-radius: 30px;
+
+    font-size: 45px;
+
+    box-shadow:
+        0 25px 60px
+        rgba(236, 72, 153, .3);
+
+    animation:
+        logoPulse
+        2s
+        infinite
+        alternate;
+
+}
+
+
+@keyframes logoPulse {
+
+    to {
+
+        transform:
+            translateY(-5px)
+            rotate(3deg);
+
+    }
+
+}
+
+
+.game-label,
+.end-label {
+
+    display: inline-flex;
+
+    padding: 7px 13px;
+
+    background: rgba(236, 72, 153, .1);
+
+    border-radius: 100px;
+
+    color: var(--primary-dark);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.game-title {
+
+    margin: 12px 0 0;
+
+    font-size:
+        clamp(48px, 9vw, 85px);
+
+    line-height: .95;
+
+    font-weight: 900;
+
+    letter-spacing: -5px;
+
+}
+
+
+.game-title span {
+
+    display: block;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+}
+
+
+.game-description {
+
+    max-width: 480px;
+
+    margin: 20px auto 30px;
+
+    color: var(--text-muted);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+}
+
+
+/* ========================================
+   NAME
+======================================== */
+
+.name-wrapper {
+
+    width: 100%;
+
+    max-width: 400px;
+
+    margin: auto;
+
+    text-align: left;
+
+}
+
+
+.name-wrapper label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+}
+
+
+.name-input-wrapper {
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 18px;
+
+    background: rgba(255, 255, 255, .8);
+
+    border: 2px solid rgba(236, 72, 153, .15);
+
+    border-radius: 17px;
+
+    transition: .3s;
+
+}
+
+
+.name-input-wrapper:focus-within {
+
+    background: white;
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 5px
+        rgba(236, 72, 153, .1);
+
+}
+
+
+.name-input-wrapper input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+}
+
+
+/* ========================================
+   PRIMARY BUTTON
+======================================== */
+
+.primary-button {
+
+    min-width: 230px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+
+    padding: 16px 25px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 18px 35px
+        rgba(236, 72, 153, .25);
+
+    transition: .25s;
+
+}
+
+
+.primary-button:hover {
+
+    transform: translateY(-4px);
+
+}
+
+
+.start-note {
+
+    margin-top: 18px;
+
+    color: var(--text-muted);
+
+    font-size: 11px;
+
+}
+
+
+/* ========================================
+   GAME CONTENT
+======================================== */
+
+.game-content {
+
+    width: 100%;
+
+    max-width: 750px;
+
+}
+
+
+/* ========================================
+   TOPBAR
+======================================== */
+
+.game-topbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 12px;
+
+}
+
+
+.game-topbar > div:first-child {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.round-label {
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.player-info {
+
+    padding: 8px 13px;
+
+    background: rgba(255, 255, 255, .7);
+
+    border-radius: 100px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+/* ========================================
+   PROGRESS
+======================================== */
+
+.progress-wrapper {
+
+    width: 100%;
+
+    height: 8px;
+
+    overflow: hidden;
+
+    margin-bottom: 25px;
+
+    background: rgba(236, 72, 153, .1);
+
+    border-radius: 100px;
+
+}
+
+
+.progress-bar {
+
+    width: 20%;
+
+    height: 100%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    transition: width .5s ease;
+
+}
+
+
+/* ========================================
+   QUESTION
+======================================== */
+
+.question-card {
+
+    min-height: 330px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+
+    background: rgba(255, 255, 255, .82);
+
+    border-radius: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 30px 80px
+        rgba(76, 35, 85, .1);
+
+}
+
+
+.question-icon {
+
+    margin-bottom: 15px;
+
+    font-size: 45px;
+
+}
+
+
+.question-small-label {
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+}
+
+
+.question-text {
+
+    max-width: 600px;
+
+    margin: 15px auto 0;
+
+    font-size:
+        clamp(25px, 5vw, 42px);
+
+    line-height: 1.25;
+
+    font-weight: 900;
+
+}
+
+
+.typing-cursor {
+
+    color: var(--primary);
+
+    font-size: 25px;
+
+    animation:
+        cursorBlink
+        .6s
+        infinite;
+
+}
+
+
+@keyframes cursorBlink {
+
+    50% {
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* ========================================
+   ANSWERS
+======================================== */
+
+.answer-buttons {
+
+    position: relative;
+
+    min-height: 90px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+}
+
+
+.answer-button {
+
+    min-height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    transition: .2s;
+
+}
+
+
+.answer-button:hover {
+
+    transform: translateY(-4px);
+
+}
+
+
+.yes-button {
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--secondary)
+        );
+
+    color: white;
+
+}
+
+
+.no-button {
+
+    background: white;
+
+    color: var(--text-dark);
+
+    border: 1px solid rgba(236, 72, 153, .15);
+
+}
+
+
+.no-button.running {
+
+    position: fixed;
+
+    z-index: 100;
+
+}
+
+
+/* ========================================
+   RESPONSE
+======================================== */
+
+.response-content {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    text-align: center;
+
+}
+
+
+.response-emoji {
+
+    font-size: 80px;
+
+    animation:
+        responseEmoji
+        1s
+        infinite
+        alternate;
+
+}
+
+
+@keyframes responseEmoji {
+
+    to {
+
+        transform:
+            translateY(-10px)
+            rotate(5deg);
+
+    }
+
+}
+
+
+.response-label {
+
+    display: inline-flex;
+
+    margin: 15px 0;
+
+    padding: 7px 13px;
+
+    background: rgba(236, 72, 153, .1);
+
+    border-radius: 100px;
+
+    color: var(--primary-dark);
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+}
+
+
+.response-card {
+
+    padding: 40px;
+
+    background: rgba(255, 255, 255, .85);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 30px 80px
+        rgba(76, 35, 85, .1);
+
+}
+
+
+.response-text {
+
+    margin: 0;
+
+    font-size:
+        clamp(23px, 4vw, 36px);
+
+    line-height: 1.45;
+
+    font-weight: 900;
+
+}
+
+
+/* ========================================
+   END
+======================================== */
+
+.end-content {
+
+    width: 100%;
+
+    max-width: 620px;
+
+    text-align: center;
+
+}
+
+
+.end-hearts {
+
+    margin-bottom: 15px;
+
+    font-size: 30px;
+
+}
+
+
+.end-content h2 {
+
+    margin: 12px 0 25px;
+
+    font-size: 35px;
+
+}
+
+
+.end-content h2 span {
+
+    color: var(--primary);
+
+}
+
+
+.end-result-card {
+
+    padding: 30px;
+
+    background: rgba(255, 255, 255, .85);
+
+    border-radius: 30px;
+
+}
+
+
+.end-emoji {
+
+    font-size: 65px;
+
+}
+
+
+.end-result-card h3 {
+
+    margin: 12px 0 8px;
+
+    font-size: 26px;
+
+}
+
+
+.end-result-card p {
+
+    margin: 0;
+
+    color: var(--text-muted);
+
+    line-height: 1.7;
+
+}
+
+
+/* ========================================
+   SCORE
+======================================== */
+
+.answer-result {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    margin-top: 20px;
+
+}
+
+
+.answer-result-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+.result-icon {
+
+    font-size: 25px;
+
+}
+
+
+.answer-result-item strong {
+
+    font-size: 25px;
+
+}
+
+
+.answer-result-divider {
+
+    width: 1px;
+
+    height: 60px;
+
+    background: rgba(236, 72, 153, .2);
+
+}
+
+
+/* ========================================
+   TOAST
+======================================== */
+
+.game-toast {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 30px;
+
+    transform:
+        translate(-50%, 100px);
+
+    display: flex;
+
+    gap: 8px;
+
+    padding: 12px 18px;
+
+    background: #3f2747;
+
+    border-radius: 100px;
+
+    color: white;
+
+    opacity: 0;
+
+    z-index: 200;
+
+    transition: .3s;
+
+}
+
+
+.game-toast.show {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media(max-width: 600px) {
+
+    .game-screen {
+
+        padding: 20px 15px;
+
+    }
+
+
+    .question-card {
+
+        min-height: 300px;
+
+        padding: 30px 20px;
+
+    }
+
+
+    .answer-buttons {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .response-card {
+
+        padding: 30px 20px;
+
+    }
+
+
+    .music-button {
+
+        top: 10px;
+
+        right: 10px;
+
+        width: 42px;
+
+        height: 42px;
+
+    }
+
+}

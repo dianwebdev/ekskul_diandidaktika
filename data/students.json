@@ -1,0 +1,155 @@
+[
+  {
+    "id": 1,
+    "name": "DANISH AQEELA AZHARY",
+    "class": "SMP",
+    "image": "data/karya-danish.png",
+    "url": "https://im-a-coding-website.github.io/danish_tank-controller/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 2,
+    "name": "RIVSYURAIH RAYA",
+    "class": "SMP",
+    "image": "data/karya-raya.png",
+    "url": "https://raya-sudo-sudo.github.io/JS-CONTROLLER/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 3,
+    "name": "TEUKU RAFAN AKHTAR",
+    "class": "SMP",
+    "image": "data/karya-rafan.png",
+    "url": "https://0113451073-spec.github.io/pesawat-buatan-prabowo/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 4,
+    "name": "ATHAYA HASNA",
+    "class": "SMP",
+    "image": "data/karya-hasna.png",
+    "url": "https://0113451073-spec.github.io/pesawat-buatan-prabowo/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 5,
+    "name": "SHAFA TSABITAH NURUSSYIFA",
+    "class": "SMP",
+    "image": "data/karya-safa.png",
+    "url": "https://0113451073-spec.github.io/pesawat-buatan-prabowo/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 6,
+    "name": "BENZ ALCHALFANI PARAMUDHYA",
+    "class": "SMP",
+    "image": "data/karya-benz.png",
+    "url": "https://0128397923-alt.github.io/tank/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 7,
+    "name": "AYAZ MUHAMMAD AROFI",
+    "class": "SMP",
+    "image": "data/karya-ayaz.png",
+    "url": "https://3111612953-stack.github.io/ayaz/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 8,
+    "name": "HARIZDANANTO PRAYATA HUDA",
+    "class": "SMP",
+    "image": "data/karya-hariz.png",
+    "url": "https://realnomadis-ops.github.io/Tank-Fire/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 9,
+    "name": "AUSTIN RAFIF KURNIYANTO",
+    "class": "SMP",
+    "image": "data/karya-austin.png",
+    "url": "https://astidd.github.io/ausmario/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 10,
+    "name": "R. MUHAMMAD RIZQI ARKANSYAH",
+    "class": "SMP",
+    "image": "data/karya-arkan.png",
+    "url": "https://nutz185.github.io/Jetgame/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+   {
+    "id": 11,
+    "name": "Zubair Baizhan",
+    "class": "SMP",
+    "image": "data/karya-mentor.png",
+    "url": "https://dianwebdev.github.io/tankshooter/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 12,
+    "name": "Tristian Raissa Mahardika",
+    "class": "SMA",
+    "image": "data/karya-tristan.png",
+    "url": "https://trisussusu.github.io/Space-shooting/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 13,
+    "name": "Riandra Shahluki",
+    "class": "SMA",
+    "image": "data/karya-andra.png",
+    "url": "https://dreckandra.github.io/Tristan-waifu-banisherr/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 14,
+    "name": "Athalla Sakhiy Gibran",
+    "class": "SMA",
+    "image": "data/karya-gibran.png",
+    "url": "https://0101307700-ai.github.io/gibshoot/",
+    "type": "game",
+    "project": "Tank Controller"
+  },
+  {
+    "id": 15,
+    "name": "Ekskul Project",
+    "class": "Project",
+    "image": "data/game-tampolin.png",
+    "url": "../games/tampolin/index.html",
+    "type": "game",
+    "project": "Game - Tampolin"
+  },
+   {
+    "id": 16,
+    "name": "Ekskul Project",
+    "class": "Project",
+    "image": "data/game-kirim-dia.png",
+    "url": "../games/kirim-dia/index.html",
+    "type": "game",
+    "project": "Game - Kirim Dia"
+  },
+  {
+    "id": 17,
+    "name": "Ekskul Project",
+    "class": "Project",
+    "image": "data/game-gombalin.png",
+    "url": "../games/gombalin-kamu/index.html",
+    "type": "game",
+    "project": "Game - Gombalin"
+  }
+]

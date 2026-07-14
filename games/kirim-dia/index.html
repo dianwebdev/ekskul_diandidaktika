@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kirim Dia! - Fun Game</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top, #29375f, #111827 45%, #05070d);
+            color: white;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        /* =========================
+           GAME CONTAINER
+        ========================= */
+
+        .game-container {
+            width: 100%;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* =========================
+           START SCREEN
+        ========================= */
+
+        .start-screen {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .start-card {
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            border-radius: 35px;
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+
+            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.45);
+
+            text-align: center;
+        }
+
+        .game-title {
+            font-size: clamp(42px, 8vw, 90px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -5px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffcc00,
+                    #ff6b00,
+                    #ff2d55
+                );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            filter:
+                drop-shadow(0 10px 20px rgba(255, 107, 0, 0.3));
+        }
+
+        .game-subtitle {
+            margin-top: 15px;
+            color: #cbd5e1;
+            font-size: 17px;
+        }
+
+        /* =========================
+           UPLOAD AREA
+        ========================= */
+
+        .upload-section {
+            margin-top: 35px;
+        }
+
+        .upload-box {
+            width: 190px;
+            height: 190px;
+            margin: auto;
+
+            border-radius: 50%;
+            border: 4px dashed rgba(255, 255, 255, 0.3);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                rgba(255, 255, 255, 0.05);
+
+            transition: 0.3s;
+        }
+
+        .upload-box:hover {
+            transform: scale(1.05);
+            border-color: #ffcc00;
+        }
+
+        .upload-placeholder {
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .upload-icon {
+            font-size: 55px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        #photoPreview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        /* =========================
+           DESTINATION
+        ========================= */
+
+        .destination-title {
+            margin-top: 35px;
+            margin-bottom: 18px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .destination {
+            padding: 25px 15px;
+            border-radius: 22px;
+
+            cursor: pointer;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            border: 2px solid transparent;
+
+            transition: 0.25s;
+        }
+
+        .destination:hover {
+            transform: translateY(-7px);
+            background:
+                rgba(255, 255, 255, 0.1);
+        }
+
+        .destination.active {
+            border-color: #ffcc00;
+
+            box-shadow:
+                0 0 0 4px rgba(255, 204, 0, 0.15),
+                0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .destination-icon {
+            font-size: 55px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .destination-name {
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .destination-description {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        /* =========================
+           SEND BUTTON
+        ========================= */
+
+        .send-button {
+            width: 100%;
+            margin-top: 30px;
+
+            border: none;
+            padding: 20px;
+
+            border-radius: 18px;
+
+            cursor: pointer;
+
+            font-size: 22px;
+            font-weight: 900;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff6b00,
+                    #ff2d55
+                );
+
+            box-shadow:
+                0 15px 35px rgba(255, 45, 85, 0.3);
+
+            transition: 0.25s;
+        }
+
+        .send-button:hover {
+            transform: translateY(-4px) scale(1.01);
+        }
+
+        .send-button:active {
+            transform: scale(0.97);
+        }
+
+        /* =========================
+           GAME SCREEN
+        ========================= */
+
+        .animation-screen {
+            display: none;
+
+            width: 100%;
+            height: 100vh;
+
+            position: fixed;
+            inset: 0;
+
+            overflow: hidden;
+
+            z-index: 100;
+        }
+
+        .scene {
+            width: 100%;
+            height: 100%;
+
+            position: absolute;
+            inset: 0;
+        }
+
+        /* =========================
+           PLAYER PHOTO
+        ========================= */
+
+        .flying-photo {
+            width: 180px;
+            height: 180px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 7px solid white;
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.6);
+
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            z-index: 20;
+        }
+
+        /* =========================
+           TEXT
+        ========================= */
+
+        .scene-title {
+            position: absolute;
+
+            width: 100%;
+
+            top: 7%;
+
+            text-align: center;
+
+            font-size: clamp(35px, 7vw, 80px);
+
+            font-weight: 900;
+
+            z-index: 30;
+
+            text-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .scene-message {
+            position: absolute;
+
+            width: 100%;
+
+            bottom: 10%;
+
+            text-align: center;
+
+            font-size: clamp(18px, 3vw, 35px);
+
+            font-weight: 800;
+
+            z-index: 30;
+
+            opacity: 0;
+        }
+
+        /* =========================
+           HELL SCENE
+        ========================= */
+
+        .hell {
+            background:
+                radial-gradient(
+                    circle at bottom,
+                    #ff8c00,
+                    #8b0000 40%,
+                    #160000 80%
+                );
+        }
+
+        .hell::before {
+            content: "🔥 🔥 🔥 🔥 🔥 🔥 🔥";
+
+            position: absolute;
+
+            bottom: -30px;
+            left: 0;
+
+            width: 100%;
+
+            font-size: 100px;
+
+            white-space: nowrap;
+
+            animation:
+                fireMove 1s infinite alternate;
+        }
+
+        @keyframes fireMove {
+            from {
+                transform: translateY(20px);
+            }
+
+            to {
+                transform: translateY(-20px);
+            }
+        }
+
+        .hell .flying-photo {
+            animation:
+                fallHell 4s ease-in forwards;
+        }
+
+        @keyframes fallHell {
+            0% {
+                top: -30%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(0deg)
+                    scale(1.3);
+            }
+
+            40% {
+                top: 35%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(180deg)
+                    scale(1);
+            }
+
+            80% {
+                top: 75%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(600deg)
+                    scale(0.7);
+            }
+
+            100% {
+                top: 120%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(900deg)
+                    scale(0.2);
+            }
+        }
+
+        /* =========================
+           OCEAN SCENE
+        ========================= */
+
+        .ocean {
+            background:
+                linear-gradient(
+                    to bottom,
+                    #35cfff,
+                    #006994 30%,
+                    #00334e 60%,
+                    #000814
+                );
+        }
+
+        .bubble {
+            position: absolute;
+
+            bottom: -100px;
+
+            width: 30px;
+            height: 30px;
+
+            border-radius: 50%;
+
+            border:
+                2px solid rgba(255, 255, 255, 0.5);
+
+            animation:
+                bubbleMove 5s linear infinite;
+        }
+
+        @keyframes bubbleMove {
+            from {
+                transform:
+                    translateY(0)
+                    scale(0.5);
+
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            to {
+                transform:
+                    translateY(-120vh)
+                    scale(1.5);
+
+                opacity: 0;
+            }
+        }
+
+        .ocean .flying-photo {
+            animation:
+                sinkOcean 6s ease-in forwards;
+        }
+
+        @keyframes sinkOcean {
+            0% {
+                top: -20%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(0deg);
+            }
+
+            30% {
+                top: 30%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(20deg);
+            }
+
+            60% {
+                top: 55%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(-20deg)
+                    scale(0.8);
+            }
+
+            100% {
+                top: 110%;
+                transform:
+                    translate(-50%, -50%)
+                    rotate(40deg)
+                    scale(0.2);
+
+                filter:
+                    brightness(0.3);
+            }
+        }
+
+        /* =========================
+           SPACE SCENE
+        ========================= */
+
+        .space {
+            background:
+                radial-gradient(
+                    circle at center,
+                    #242b6b,
+                    #080b26 50%,
+                    #010208
+                );
+        }
+
+        .star {
+            position: absolute;
+
+            width: 3px;
+            height: 3px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            animation:
+                starBlink 1s infinite alternate;
+        }
+
+        @keyframes starBlink {
+            from {
+                opacity: 0.2;
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(2);
+            }
+        }
+
+        .space .flying-photo {
+            animation:
+                flySpace 6s ease-in forwards;
+        }
+
+        @keyframes flySpace {
+            0% {
+                left: 50%;
+                top: 120%;
+
+                transform:
+                    translate(-50%, -50%)
+                    rotate(0deg)
+                    scale(1.5);
+            }
+
+            35% {
+                left: 40%;
+                top: 55%;
+
+                transform:
+                    translate(-50%, -50%)
+                    rotate(250deg)
+                    scale(1);
+            }
+
+            70% {
+                left: 65%;
+                top: 25%;
+
+                transform:
+                    translate(-50%, -50%)
+                    rotate(700deg)
+                    scale(0.5);
+            }
+
+            100% {
+                left: 52%;
+                top: -30%;
+
+                transform:
+                    translate(-50%, -50%)
+                    rotate(1300deg)
+                    scale(0.05);
+            }
+        }
+
+        /* =========================
+           FLASH
+        ========================= */
+
+        .flash {
+            position: fixed;
+
+            inset: 0;
+
+            background: white;
+
+            z-index: 500;
+
+            pointer-events: none;
+
+            opacity: 0;
+        }
+
+        .flash.active {
+            animation:
+                flashEffect 0.5s ease-out;
+        }
+
+        @keyframes flashEffect {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           SHAKE
+        ========================= */
+
+        .shake {
+            animation:
+                screenShake 0.5s;
+        }
+
+        @keyframes screenShake {
+            0% {
+                transform: translate(0);
+            }
+
+            20% {
+                transform: translate(-15px, 10px);
+            }
+
+            40% {
+                transform: translate(15px, -10px);
+            }
+
+            60% {
+                transform: translate(-10px, 15px);
+            }
+
+            80% {
+                transform: translate(10px, -15px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
+        }
+
+        /* =========================
+           RESTART
+        ========================= */
+
+        .restart-button {
+            position: absolute;
+
+            left: 50%;
+            bottom: 30px;
+
+            transform: translateX(-50%);
+
+            padding: 15px 30px;
+
+            border: none;
+            border-radius: 50px;
+
+            background: white;
+            color: #111827;
+
+            font-weight: 900;
+            font-size: 16px;
+
+            cursor: pointer;
+
+            z-index: 100;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: 0.4s;
+        }
+
+        .restart-button.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media(max-width: 700px) {
+
+            body {
+                overflow: auto;
+            }
+
+            .start-screen {
+                padding: 15px;
+            }
+
+            .start-card {
+                padding: 25px 15px;
+            }
+
+            .destinations {
+                grid-template-columns: 1fr;
+            }
+
+            .destination {
+                display: flex;
+                align-items: center;
+                text-align: left;
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .destination-icon {
+                margin: 0;
+                font-size: 40px;
+            }
+
+            .upload-box {
+                width: 150px;
+                height: 150px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="game-container">
+
+    <!-- =========================
+         START SCREEN
+    ========================== -->
+
+    <div class="start-screen" id="startScreen">
+
+        <div class="start-card">
+
+            <h1 class="game-title">
+                KIRIM DIA!
+            </h1>
+
+            <p class="game-subtitle">
+                Lagi kesel sama teman? Kirim fotonya ke tempat absurd pilihanmu! 😂
+            </p>
+
+            <!-- UPLOAD -->
+
+            <div class="upload-section">
+
+                <label
+                    class="upload-box"
+                    for="photoInput"
+                >
+
+                    <div
+                        class="upload-placeholder"
+                        id="uploadPlaceholder"
+                    >
+                        <span class="upload-icon">
+                            📸
+                        </span>
+
+                        Upload Foto
+                    </div>
+
+                    <img
+                        src=""
+                        id="photoPreview"
+                        alt="Preview"
+                    >
+
+                </label>
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*"
+                >
+
+            </div>
+
+            <!-- DESTINATION -->
+
+            <div class="destination-title">
+                MAU DIKIRIM KE MANA?
+            </div>
+
+            <div class="destinations">
+
+                <div
+                    class="destination"
+                    data-destination="hell"
+                >
+
+                    <span class="destination-icon">
+                        🔥
+                    </span>
+
+                    <div>
+                        <div class="destination-name">
+                            NERAKA
+                        </div>
+
+                        <div class="destination-description">
+                            Panas, berisik, dan penuh api.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="destination"
+                    data-destination="ocean"
+                >
+
+                    <span class="destination-icon">
+                        🌊
+                    </span>
+
+                    <div>
+                        <div class="destination-name">
+                            LAUT DALAM
+                        </div>
+
+                        <div class="destination-description">
+                            Tenggelam sampai dasar samudra.
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="destination"
+                    data-destination="space"
+                >
+
+                    <span class="destination-icon">
+                        🚀
+                    </span>
+
+                    <div>
+                        <div class="destination-name">
+                            LUAR ANGKASA
+                        </div>
+
+                        <div class="destination-description">
+                            Terbang jauh meninggalkan bumi.
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button
+                class="send-button"
+                id="sendButton"
+            >
+                🚀 KIRIM SEKARANG!
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         ANIMATION SCREEN
+    ========================== -->
+
+    <div
+        class="animation-screen"
+        id="animationScreen"
+    >
+
+        <div
+            class="scene"
+            id="scene"
+        >
+
+            <div
+                class="scene-title"
+                id="sceneTitle"
+            ></div>
+
+            <img
+                src=""
+                class="flying-photo"
+                id="flyingPhoto"
+            >
+
+            <div
+                class="scene-message"
+                id="sceneMessage"
+            ></div>
+
+            <button
+                class="restart-button"
+                id="restartButton"
+            >
+                🔄 KIRIM ORANG LAIN
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="flash"
+        id="flash"
+    ></div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    const photoInput =
+        document.getElementById("photoInput");
+
+    const photoPreview =
+        document.getElementById("photoPreview");
+
+    const uploadPlaceholder =
+        document.getElementById("uploadPlaceholder");
+
+    const destinations =
+        document.querySelectorAll(".destination");
+
+    const sendButton =
+        document.getElementById("sendButton");
+
+    const startScreen =
+        document.getElementById("startScreen");
+
+    const animationScreen =
+        document.getElementById("animationScreen");
+
+    const scene =
+        document.getElementById("scene");
+
+    const sceneTitle =
+        document.getElementById("sceneTitle");
+
+    const sceneMessage =
+        document.getElementById("sceneMessage");
+
+    const flyingPhoto =
+        document.getElementById("flyingPhoto");
+
+    const restartButton =
+        document.getElementById("restartButton");
+
+    const flash =
+        document.getElementById("flash");
+
+
+    let selectedDestination = null;
+
+    let uploadedPhoto = null;
+
+
+    /* =========================
+       UPLOAD PHOTO
+    ========================= */
+
+    photoInput.addEventListener(
+        "change",
+        function(event) {
+
+            const file =
+                event.target.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                function(e) {
+
+                    uploadedPhoto =
+                        e.target.result;
+
+                    photoPreview.src =
+                        uploadedPhoto;
+
+                    photoPreview.style.display =
+                        "block";
+
+                    uploadPlaceholder.style.display =
+                        "none";
+                };
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+    /* =========================
+       SELECT DESTINATION
+    ========================= */
+
+    destinations.forEach(
+        destination => {
+
+            destination.addEventListener(
+                "click",
+                function() {
+
+                    destinations.forEach(
+                        item => {
+                            item.classList.remove("active");
+                        }
+                    );
+
+                    this.classList.add("active");
+
+                    selectedDestination =
+                        this.dataset.destination;
+
+                    playClickSound();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================
+       SEND BUTTON
+    ========================= */
+
+    sendButton.addEventListener(
+        "click",
+        function() {
+
+            if (!uploadedPhoto) {
+
+                alert(
+                    "Upload foto dulu dong! 😂"
+                );
+
+                return;
+            }
+
+
+            if (!selectedDestination) {
+
+                alert(
+                    "Pilih tujuan pengiriman dulu!"
+                );
+
+                return;
+            }
+
+
+            startGame();
+
+        }
+    );
+
+
+    /* =========================
+       START GAME
+    ========================= */
+
+    function startGame() {
+
+        startScreen.style.display =
+            "none";
+
+        animationScreen.style.display =
+            "block";
+
+
+        flyingPhoto.src =
+            uploadedPhoto;
+
+
+        scene.className =
+            "scene";
+
+
+        restartButton.classList.remove(
+            "show"
+        );
+
+
+        sceneMessage.style.opacity =
+            "0";
+
+
+        createFlash();
+
+
+        setTimeout(
+            function() {
+
+                scene.classList.add(
+                    "shake"
+                );
+
+            },
+            100
+        );
+
+
+        if (
+            selectedDestination === "hell"
+        ) {
+
+            startHellScene();
+
+        }
+
+
+        if (
+            selectedDestination === "ocean"
+        ) {
+
+            startOceanScene();
+
+        }
+
+
+        if (
+            selectedDestination === "space"
+        ) {
+
+            startSpaceScene();
+
+        }
+
+    }
+
+
+    /* =========================
+       HELL
+    ========================= */
+
+    function startHellScene() {
+
+        scene.classList.add("hell");
+
+        sceneTitle.innerHTML =
+            "🔥 DIKIRIM KE NERAKA! 🔥";
+
+        sceneMessage.innerHTML =
+            "SEMOGA BETAH SAMA PANASNYA! 😂";
+
+
+        playHellSound();
+
+
+        setTimeout(
+            function() {
+
+                showFinalMessage();
+
+            },
+            4000
+        );
+
+    }
+
+
+    /* =========================
+       OCEAN
+    ========================= */
+
+    function startOceanScene() {
+
+        scene.classList.add("ocean");
+
+        sceneTitle.innerHTML =
+            "🌊 TENGGELAMKAN! 🌊";
+
+        sceneMessage.innerHTML =
+            "SAMPAI JUMPA DI DASAR LAUT! 🐟";
+
+
+        createBubbles();
+
+        playOceanSound();
+
+
+        setTimeout(
+            function() {
+
+                showFinalMessage();
+
+            },
+            6000
+        );
+
+    }
+
+
+    /* =========================
+       SPACE
+    ========================= */
+
+    function startSpaceScene() {
+
+        scene.classList.add("space");
+
+        sceneTitle.innerHTML =
+            "🚀 LUNCURKAN! 🚀";
+
+        sceneMessage.innerHTML =
+            "SELAMAT TINGGAL BUMI! 👽";
+
+
+        createStars();
+
+        playSpaceSound();
+
+
+        setTimeout(
+            function() {
+
+                showFinalMessage();
+
+            },
+            6000
+        );
+
+    }
+
+
+    /* =========================
+       FINAL MESSAGE
+    ========================= */
+
+    function showFinalMessage() {
+
+        sceneMessage.style.transition =
+            "0.5s";
+
+        sceneMessage.style.opacity =
+            "1";
+
+
+        restartButton.classList.add(
+            "show"
+        );
+
+    }
+
+
+    /* =========================
+       BUBBLES
+    ========================= */
+
+    function createBubbles() {
+
+        for (
+            let i = 0;
+            i < 40;
+            i++
+        ) {
+
+            const bubble =
+                document.createElement("div");
+
+            bubble.classList.add(
+                "bubble"
+            );
+
+            bubble.style.left =
+                Math.random() * 100 + "%";
+
+            bubble.style.animationDelay =
+                Math.random() * 5 + "s";
+
+            bubble.style.animationDuration =
+                (
+                    3 +
+                    Math.random() * 5
+                )
+                +
+                "s";
+
+            scene.appendChild(
+                bubble
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       STARS
+    ========================= */
+
+    function createStars() {
+
+        for (
+            let i = 0;
+            i < 100;
+            i++
+        ) {
+
+            const star =
+                document.createElement("div");
+
+            star.classList.add(
+                "star"
+            );
+
+            star.style.left =
+                Math.random() * 100 + "%";
+
+            star.style.top =
+                Math.random() * 100 + "%";
+
+            star.style.animationDelay =
+                Math.random() * 2 + "s";
+
+            scene.appendChild(
+                star
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       FLASH
+    ========================= */
+
+    function createFlash() {
+
+        flash.classList.remove(
+            "active"
+        );
+
+        void flash.offsetWidth;
+
+        flash.classList.add(
+            "active"
+        );
+
+    }
+
+
+    /* =========================
+       RESTART
+    ========================= */
+
+    restartButton.addEventListener(
+        "click",
+        function() {
+
+            animationScreen.style.display =
+                "none";
+
+            startScreen.style.display =
+                "flex";
+
+
+            scene.innerHTML =
+                `
+
+                <div
+                    class="scene-title"
+                    id="sceneTitle"
+                ></div>
+
+                <img
+                    src=""
+                    class="flying-photo"
+                    id="flyingPhoto"
+                >
+
+                <div
+                    class="scene-message"
+                    id="sceneMessage"
+                ></div>
+
+                <button
+                    class="restart-button"
+                    id="restartButton"
+                >
+                    🔄 KIRIM ORANG LAIN
+                </button>
+
+                `;
+
+
+            location.reload();
+
+        }
+    );
+
+
+    /* =========================
+       AUDIO SYSTEM
+    ========================= */
+
+    function createAudioContext() {
+
+        return new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
+
+    }
+
+
+    function playClickSound() {
+
+        const audioContext =
+            createAudioContext();
+
+        const oscillator =
+            audioContext.createOscillator();
+
+        const gain =
+            audioContext.createGain();
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            audioContext.destination
+        );
+
+
+        oscillator.frequency.value =
+            500;
+
+
+        gain.gain.setValueAtTime(
+            0.15,
+            audioContext.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audioContext.currentTime + 0.15
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + 0.15
+        );
+
+    }
+
+
+    /* =========================
+       HELL SOUND
+    ========================= */
+
+    function playHellSound() {
+
+        const audioContext =
+            createAudioContext();
+
+
+        const oscillator =
+            audioContext.createOscillator();
+
+
+        const gain =
+            audioContext.createGain();
+
+
+        oscillator.type =
+            "sawtooth";
+
+
+        oscillator.frequency.setValueAtTime(
+            300,
+            audioContext.currentTime
+        );
+
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            50,
+            audioContext.currentTime + 4
+        );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            audioContext.destination
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.2,
+            audioContext.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audioContext.currentTime + 4
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + 4
+        );
+
+    }
+
+
+    /* =========================
+       OCEAN SOUND
+    ========================= */
+
+    function playOceanSound() {
+
+        const audioContext =
+            createAudioContext();
+
+
+        const oscillator =
+            audioContext.createOscillator();
+
+
+        const gain =
+            audioContext.createGain();
+
+
+        oscillator.type =
+            "sine";
+
+
+        oscillator.frequency.setValueAtTime(
+            400,
+            audioContext.currentTime
+        );
+
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            70,
+            audioContext.currentTime + 6
+        );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            audioContext.destination
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.2,
+            audioContext.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audioContext.currentTime + 6
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + 6
+        );
+
+    }
+
+
+    /* =========================
+       SPACE SOUND
+    ========================= */
+
+    function playSpaceSound() {
+
+        const audioContext =
+            createAudioContext();
+
+
+        const oscillator =
+            audioContext.createOscillator();
+
+
+        const gain =
+            audioContext.createGain();
+
+
+        oscillator.type =
+            "sawtooth";
+
+
+        oscillator.frequency.setValueAtTime(
+            80,
+            audioContext.currentTime
+        );
+
+
+        oscillator.frequency.exponentialRampToValueAtTime(
+            1200,
+            audioContext.currentTime + 5
+        );
+
+
+        oscillator.connect(gain);
+
+        gain.connect(
+            audioContext.destination
+        );
+
+
+        gain.gain.setValueAtTime(
+            0.2,
+            audioContext.currentTime
+        );
+
+
+        gain.gain.exponentialRampToValueAtTime(
+            0.001,
+            audioContext.currentTime + 5
+        );
+
+
+        oscillator.start();
+
+        oscillator.stop(
+            audioContext.currentTime + 5
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
