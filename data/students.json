@@ -130,7 +130,7 @@
     "name": "Ekskul Project",
     "class": "Project",
     "image": "data/game-tampolin.png",
-    "url": "../games/tampolin/index.html",
+    "url": "https://dianwebdev.github.io/game_tampolin/",
     "type": "game",
     "project": "Game - Tampolin"
   },
@@ -139,7 +139,7 @@
     "name": "Ekskul Project",
     "class": "Project",
     "image": "data/game-kirim-dia.png",
-    "url": "../games/kirim-dia/index.html",
+    "url": "https://dianwebdev.github.io/game_kirim_dia/",
     "type": "game",
     "project": "Game - Kirim Dia"
   },
@@ -148,7 +148,7 @@
     "name": "Ekskul Project",
     "class": "Project",
     "image": "data/game-gombalin.png",
-    "url": "../games/gombalin-kamu/index.html",
+    "url": "https://dianwebdev.github.io/game_gombalin_kamu/",
     "type": "game",
     "project": "Game - Gombalin"
   }
