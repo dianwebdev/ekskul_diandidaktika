@@ -82,7 +82,7 @@ function renderStudents(data) {
             (isGame ? 'Game Project' : 'Website Project');
 
         const card = `
-            <div class="col-xl-4 col-md-6">
+            <div class="col-xl-3 col-md-6">
 
                 <article
                     class="student-card"
