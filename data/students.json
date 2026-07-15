@@ -151,5 +151,14 @@
     "url": "https://dianwebdev.github.io/game_gombalin_kamu/",
     "type": "game",
     "project": "Game - Gombalin"
+  },
+  {
+    "id": 18,
+    "name": "Ekskul Project",
+    "class": "Project",
+    "image": "data/game-ngeselin.png",
+    "url": "https://dianwebdev.github.io/game_ngeselin/",
+    "type": "game",
+    "project": "Game - Ngeselin"
   }
 ]
